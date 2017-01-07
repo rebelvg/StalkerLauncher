@@ -22,7 +22,7 @@ namespace StalkerLauncher
     {
         string launcherVersion = "0.11";
 
-        StalkerLauncherXmlSettings LauncherSettings;        
+        StalkerLauncherXmlSettings LauncherSettings;
 
         [DllImport("kernel32.dll")]
         static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
