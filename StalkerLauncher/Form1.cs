@@ -340,14 +340,8 @@ namespace StalkerLauncher
                 }
             }
 
-            foreach (KeyValuePair<string, string> entry in gamedataFiles)
-            {
-                CheckPath(ReturnStalkerGamedataFolder() + entry.Key);
-
-                CreateSymbolicLink(ReturnStalkerGamedataFolder() + entry.Key, entry.Value, SymbolicLink.File);
-            }
-
-            MessageBox.Show("Gamedata built. " + gamedataFiles.Count + " symlinks were created.");
+            Thread NewThread = new Thread(() => CopyFilesNewThread(gamedataFiles));
+            NewThread.Start();            
 
             return true;
         }
@@ -436,6 +430,62 @@ namespace StalkerLauncher
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/rebelvg/StalkerLauncher");
+        }
+
+        public void LockInterface(string text)
+        {
+            this.Invoke(new Action(() =>
+            {
+                this.Enabled = false;
+                ChangeHeader(text);
+            }));
+        }
+
+        public void UnlockInterface()
+        {
+            this.Invoke(new Action(() =>
+            {
+                this.Enabled = true;
+                ChangeHeader("Stalker Launcher");
+            }));
+        }
+
+        public void ChangeHeader(string text)
+        {
+            this.Invoke(new Action(() =>
+            {
+                this.Text = text;
+            }));
+        }
+
+        public void CopyFilesNewThread(Dictionary<string, string> gamedataFiles)
+        {
+            LockInterface("Copying...");
+
+            this.Invoke(new Action(() =>
+            {
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = gamedataFiles.Count();
+                progressBar1.Value = 0;
+                progressBar1.Step = 1;
+            }));
+
+            foreach (KeyValuePair<string, string> entry in gamedataFiles)
+            {
+                CheckPath(ReturnStalkerGamedataFolder() + entry.Key);
+
+                ChangeHeader("Copying... (" + progressBar1.Value + "/" + progressBar1.Maximum + ")");
+
+                File.Copy(entry.Value, ReturnStalkerGamedataFolder() + entry.Key, true);
+
+                this.Invoke(new Action(() => progressBar1.PerformStep()));
+
+                ChangeHeader("Copying... (" + progressBar1.Value + "/" + progressBar1.Maximum + ")");                
+            }
+
+            MessageBox.Show("Gamedata built. " + gamedataFiles.Count + " files were copied.");
+
+            UnlockInterface();
         }
     }
 }
