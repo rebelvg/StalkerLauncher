@@ -20,7 +20,7 @@ namespace StalkerLauncher
 {
     public partial class Form1 : Form
     {
-        string launcherVersion = "0.11";
+        string launcherVersion = "0.12";
 
         StalkerLauncherXmlSettings LauncherSettings;
 
