@@ -20,11 +20,9 @@ namespace StalkerLauncher
 {
     public partial class Form1 : Form
     {
-        string launcherVersion = "0.1";
+        string launcherVersion = "0.11";
 
-        StalkerLauncherXmlSettings LauncherSettings;
-
-        Dictionary<string, string> gamedataFiles = new Dictionary<string, string>();
+        StalkerLauncherXmlSettings LauncherSettings;        
 
         [DllImport("kernel32.dll")]
         static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
@@ -321,6 +319,8 @@ namespace StalkerLauncher
 
             if (!ClearGamedata())
                 return false;
+
+            Dictionary<string, string> gamedataFiles = new Dictionary<string, string>();
 
             foreach (ListViewItem A in modsList_listView.CheckedItems)
             {
