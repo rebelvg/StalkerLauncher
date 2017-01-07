@@ -55,6 +55,8 @@
             this.modsGamedata_listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.deselectAll_button = new System.Windows.Forms.Button();
+            this.selectAll_button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -62,16 +64,20 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1016, 663);
+            this.tabControl1.Size = new System.Drawing.Size(1047, 689);
             this.tabControl1.TabIndex = 48;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.selectAll_button);
+            this.tabPage1.Controls.Add(this.deselectAll_button);
             this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.linkLabel1);
             this.tabPage1.Controls.Add(this.label4);
@@ -90,18 +96,19 @@
             this.tabPage1.Controls.Add(this.modsList_listView);
             this.tabPage1.Controls.Add(this.pathToStalker_textBox);
             this.tabPage1.Controls.Add(this.xmlPath_textBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1008, 637);
+            this.tabPage1.Size = new System.Drawing.Size(1039, 660);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
             // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(6, 597);
+            this.linkLabel1.Location = new System.Drawing.Point(8, 620);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(40, 13);
             this.linkLabel1.TabIndex = 66;
@@ -112,7 +119,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 408);
+            this.label4.Location = new System.Drawing.Point(8, 121);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 13);
             this.label4.TabIndex = 65;
@@ -138,8 +145,9 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 618);
+            this.label1.Location = new System.Drawing.Point(8, 641);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 62;
@@ -147,7 +155,8 @@
             // 
             // buildGamedata_button
             // 
-            this.buildGamedata_button.Location = new System.Drawing.Point(767, 576);
+            this.buildGamedata_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buildGamedata_button.Location = new System.Drawing.Point(796, 599);
             this.buildGamedata_button.Name = "buildGamedata_button";
             this.buildGamedata_button.Size = new System.Drawing.Size(93, 23);
             this.buildGamedata_button.TabIndex = 61;
@@ -157,7 +166,8 @@
             // 
             // removeMod_button
             // 
-            this.removeMod_button.Location = new System.Drawing.Point(883, 459);
+            this.removeMod_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeMod_button.Location = new System.Drawing.Point(926, 450);
             this.removeMod_button.Name = "removeMod_button";
             this.removeMod_button.Size = new System.Drawing.Size(105, 36);
             this.removeMod_button.TabIndex = 58;
@@ -167,7 +177,8 @@
             // 
             // lowerMod_button
             // 
-            this.lowerMod_button.Location = new System.Drawing.Point(772, 459);
+            this.lowerMod_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lowerMod_button.Location = new System.Drawing.Point(815, 450);
             this.lowerMod_button.Name = "lowerMod_button";
             this.lowerMod_button.Size = new System.Drawing.Size(105, 36);
             this.lowerMod_button.TabIndex = 57;
@@ -177,7 +188,8 @@
             // 
             // upMod_button
             // 
-            this.upMod_button.Location = new System.Drawing.Point(661, 459);
+            this.upMod_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.upMod_button.Location = new System.Drawing.Point(704, 450);
             this.upMod_button.Name = "upMod_button";
             this.upMod_button.Size = new System.Drawing.Size(105, 36);
             this.upMod_button.TabIndex = 56;
@@ -187,7 +199,8 @@
             // 
             // addMod_button
             // 
-            this.addMod_button.Location = new System.Drawing.Point(550, 459);
+            this.addMod_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addMod_button.Location = new System.Drawing.Point(593, 450);
             this.addMod_button.Name = "addMod_button";
             this.addMod_button.Size = new System.Drawing.Size(105, 36);
             this.addMod_button.TabIndex = 55;
@@ -197,7 +210,8 @@
             // 
             // saveSettingsClient_button
             // 
-            this.saveSettingsClient_button.Location = new System.Drawing.Point(767, 608);
+            this.saveSettingsClient_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveSettingsClient_button.Location = new System.Drawing.Point(796, 631);
             this.saveSettingsClient_button.Name = "saveSettingsClient_button";
             this.saveSettingsClient_button.Size = new System.Drawing.Size(93, 23);
             this.saveSettingsClient_button.TabIndex = 54;
@@ -217,7 +231,8 @@
             // 
             // launch_button
             // 
-            this.launch_button.Location = new System.Drawing.Point(866, 576);
+            this.launch_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.launch_button.Location = new System.Drawing.Point(895, 599);
             this.launch_button.Name = "launch_button";
             this.launch_button.Size = new System.Drawing.Size(136, 55);
             this.launch_button.TabIndex = 52;
@@ -227,13 +242,16 @@
             // 
             // startLine_textBox
             // 
-            this.startLine_textBox.Location = new System.Drawing.Point(7, 424);
+            this.startLine_textBox.Location = new System.Drawing.Point(9, 137);
             this.startLine_textBox.Name = "startLine_textBox";
-            this.startLine_textBox.Size = new System.Drawing.Size(439, 20);
+            this.startLine_textBox.Size = new System.Drawing.Size(437, 20);
             this.startLine_textBox.TabIndex = 51;
             // 
             // modsList_listView
             // 
+            this.modsList_listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modsList_listView.CheckBoxes = true;
             this.modsList_listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7});
@@ -241,10 +259,10 @@
             this.modsList_listView.GridLines = true;
             this.modsList_listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.modsList_listView.HideSelection = false;
-            this.modsList_listView.Location = new System.Drawing.Point(477, 6);
+            this.modsList_listView.Location = new System.Drawing.Point(452, 6);
             this.modsList_listView.MultiSelect = false;
             this.modsList_listView.Name = "modsList_listView";
-            this.modsList_listView.Size = new System.Drawing.Size(511, 438);
+            this.modsList_listView.Size = new System.Drawing.Size(579, 438);
             this.modsList_listView.TabIndex = 50;
             this.modsList_listView.UseCompatibleStateImageBehavior = false;
             this.modsList_listView.View = System.Windows.Forms.View.Details;
@@ -252,7 +270,7 @@
             // columnHeader7
             // 
             this.columnHeader7.Text = "Mods";
-            this.columnHeader7.Width = 478;
+            this.columnHeader7.Width = 549;
             // 
             // pathToStalker_textBox
             // 
@@ -275,10 +293,10 @@
             // 
             this.tabPage2.Controls.Add(this.stalkerGamedata_listView);
             this.tabPage2.Controls.Add(this.modsGamedata_listView);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1008, 637);
+            this.tabPage2.Size = new System.Drawing.Size(1039, 660);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Files";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -293,7 +311,7 @@
             this.stalkerGamedata_listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.stalkerGamedata_listView.Location = new System.Drawing.Point(6, 6);
             this.stalkerGamedata_listView.Name = "stalkerGamedata_listView";
-            this.stalkerGamedata_listView.Size = new System.Drawing.Size(499, 438);
+            this.stalkerGamedata_listView.Size = new System.Drawing.Size(502, 646);
             this.stalkerGamedata_listView.TabIndex = 52;
             this.stalkerGamedata_listView.UseCompatibleStateImageBehavior = false;
             this.stalkerGamedata_listView.View = System.Windows.Forms.View.Details;
@@ -311,9 +329,9 @@
             this.modsGamedata_listView.FullRowSelect = true;
             this.modsGamedata_listView.GridLines = true;
             this.modsGamedata_listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.modsGamedata_listView.Location = new System.Drawing.Point(519, 6);
+            this.modsGamedata_listView.Location = new System.Drawing.Point(514, 6);
             this.modsGamedata_listView.Name = "modsGamedata_listView";
-            this.modsGamedata_listView.Size = new System.Drawing.Size(483, 438);
+            this.modsGamedata_listView.Size = new System.Drawing.Size(517, 646);
             this.modsGamedata_listView.TabIndex = 51;
             this.modsGamedata_listView.UseCompatibleStateImageBehavior = false;
             this.modsGamedata_listView.View = System.Windows.Forms.View.Details;
@@ -325,10 +343,33 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(477, 576);
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(452, 599);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(284, 23);
+            this.progressBar1.Size = new System.Drawing.Size(338, 23);
             this.progressBar1.TabIndex = 67;
+            // 
+            // deselectAll_button
+            // 
+            this.deselectAll_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deselectAll_button.Location = new System.Drawing.Point(370, 421);
+            this.deselectAll_button.Name = "deselectAll_button";
+            this.deselectAll_button.Size = new System.Drawing.Size(76, 23);
+            this.deselectAll_button.TabIndex = 68;
+            this.deselectAll_button.Text = "Deselect All";
+            this.deselectAll_button.UseVisualStyleBackColor = true;
+            this.deselectAll_button.Click += new System.EventHandler(this.deselectAll_button_Click);
+            // 
+            // selectAll_button
+            // 
+            this.selectAll_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.selectAll_button.Location = new System.Drawing.Point(370, 392);
+            this.selectAll_button.Name = "selectAll_button";
+            this.selectAll_button.Size = new System.Drawing.Size(76, 23);
+            this.selectAll_button.TabIndex = 69;
+            this.selectAll_button.Text = "Select All";
+            this.selectAll_button.UseVisualStyleBackColor = true;
+            this.selectAll_button.Click += new System.EventHandler(this.selectAll_button_Click);
             // 
             // Form1
             // 
@@ -337,6 +378,7 @@
             this.ClientSize = new System.Drawing.Size(1047, 689);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(1055, 716);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stalker Launcher";
@@ -378,6 +420,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button selectAll_button;
+        private System.Windows.Forms.Button deselectAll_button;
     }
 }
 

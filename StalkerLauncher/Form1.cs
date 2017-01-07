@@ -487,5 +487,21 @@ namespace StalkerLauncher
 
             UnlockInterface();
         }
+
+        private void selectAll_button_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in modsList_listView.Items)
+            {
+                item.Checked = true;
+            }
+        }
+
+        private void deselectAll_button_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in modsList_listView.Items)
+            {
+                item.Checked = false;
+            }
+        }
     }
 }
