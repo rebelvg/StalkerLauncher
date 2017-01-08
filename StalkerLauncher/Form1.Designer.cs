@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.selectAll_button = new System.Windows.Forms.Button();
+            this.deselectAll_button = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,9 +57,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.modsGamedata_listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.deselectAll_button = new System.Windows.Forms.Button();
-            this.selectAll_button = new System.Windows.Forms.Button();
+            this.clearAndBuildGamedata_button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -76,6 +77,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.clearAndBuildGamedata_button);
             this.tabPage1.Controls.Add(this.selectAll_button);
             this.tabPage1.Controls.Add(this.deselectAll_button);
             this.tabPage1.Controls.Add(this.progressBar1);
@@ -103,6 +105,36 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // selectAll_button
+            // 
+            this.selectAll_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.selectAll_button.Location = new System.Drawing.Point(370, 392);
+            this.selectAll_button.Name = "selectAll_button";
+            this.selectAll_button.Size = new System.Drawing.Size(76, 23);
+            this.selectAll_button.TabIndex = 69;
+            this.selectAll_button.Text = "Select All";
+            this.selectAll_button.UseVisualStyleBackColor = true;
+            this.selectAll_button.Click += new System.EventHandler(this.selectAll_button_Click);
+            // 
+            // deselectAll_button
+            // 
+            this.deselectAll_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deselectAll_button.Location = new System.Drawing.Point(370, 421);
+            this.deselectAll_button.Name = "deselectAll_button";
+            this.deselectAll_button.Size = new System.Drawing.Size(76, 23);
+            this.deselectAll_button.TabIndex = 68;
+            this.deselectAll_button.Text = "Deselect All";
+            this.deselectAll_button.UseVisualStyleBackColor = true;
+            this.deselectAll_button.Click += new System.EventHandler(this.deselectAll_button_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(452, 599);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(338, 23);
+            this.progressBar1.TabIndex = 67;
             // 
             // linkLabel1
             // 
@@ -341,35 +373,16 @@
             this.columnHeader1.Text = "Mods Gamedata";
             this.columnHeader1.Width = 478;
             // 
-            // progressBar1
+            // clearAndBuildGamedata_button
             // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(452, 599);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(338, 23);
-            this.progressBar1.TabIndex = 67;
-            // 
-            // deselectAll_button
-            // 
-            this.deselectAll_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deselectAll_button.Location = new System.Drawing.Point(370, 421);
-            this.deselectAll_button.Name = "deselectAll_button";
-            this.deselectAll_button.Size = new System.Drawing.Size(76, 23);
-            this.deselectAll_button.TabIndex = 68;
-            this.deselectAll_button.Text = "Deselect All";
-            this.deselectAll_button.UseVisualStyleBackColor = true;
-            this.deselectAll_button.Click += new System.EventHandler(this.deselectAll_button_Click);
-            // 
-            // selectAll_button
-            // 
-            this.selectAll_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.selectAll_button.Location = new System.Drawing.Point(370, 392);
-            this.selectAll_button.Name = "selectAll_button";
-            this.selectAll_button.Size = new System.Drawing.Size(76, 23);
-            this.selectAll_button.TabIndex = 69;
-            this.selectAll_button.Text = "Select All";
-            this.selectAll_button.UseVisualStyleBackColor = true;
-            this.selectAll_button.Click += new System.EventHandler(this.selectAll_button_Click);
+            this.clearAndBuildGamedata_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearAndBuildGamedata_button.Location = new System.Drawing.Point(796, 555);
+            this.clearAndBuildGamedata_button.Name = "clearAndBuildGamedata_button";
+            this.clearAndBuildGamedata_button.Size = new System.Drawing.Size(93, 38);
+            this.clearAndBuildGamedata_button.TabIndex = 70;
+            this.clearAndBuildGamedata_button.Text = "Clear and Build Gamedata";
+            this.clearAndBuildGamedata_button.UseVisualStyleBackColor = true;
+            this.clearAndBuildGamedata_button.Click += new System.EventHandler(this.clearAndBuildGamedata_button_Click);
             // 
             // Form1
             // 
@@ -422,6 +435,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button selectAll_button;
         private System.Windows.Forms.Button deselectAll_button;
+        private System.Windows.Forms.Button clearAndBuildGamedata_button;
     }
 }
 

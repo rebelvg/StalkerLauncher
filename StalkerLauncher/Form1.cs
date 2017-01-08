@@ -315,10 +315,7 @@ namespace StalkerLauncher
 
         public bool BuildGamedata()
         {
-            RefreshPresetModsList();
-
-            if (!ClearGamedata())
-                return false;
+            RefreshPresetModsList();            
 
             Dictionary<string, string> gamedataFiles = new Dictionary<string, string>();
 
@@ -341,7 +338,7 @@ namespace StalkerLauncher
             }
 
             Thread NewThread = new Thread(() => CopyFilesNewThread(gamedataFiles));
-            NewThread.Start();            
+            NewThread.Start();
 
             return true;
         }
@@ -377,11 +374,6 @@ namespace StalkerLauncher
                 if (!Directory.Exists(fullpath))
                     Directory.CreateDirectory(fullpath);
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ClearGamedata();
         }
 
         private void buildGamedata_button_Click(object sender, EventArgs e)
@@ -476,11 +468,23 @@ namespace StalkerLauncher
 
                 ChangeHeader("Copying... (" + progressBar1.Value + "/" + progressBar1.Maximum + ")");
 
-                File.Copy(entry.Value, ReturnStalkerGamedataFolder() + entry.Key, true);
+                if (File.Exists(ReturnStalkerGamedataFolder() + entry.Key))
+                {
+                    FileInfo stalkerFile = new FileInfo(ReturnStalkerGamedataFolder() + entry.Key);
+                    FileInfo modFile = new FileInfo(entry.Value);
+
+                    if (stalkerFile.Length != modFile.Length || stalkerFile.LastWriteTimeUtc != modFile.LastWriteTimeUtc)
+                        File.Copy(entry.Value, ReturnStalkerGamedataFolder() + entry.Key, true);
+                }
+                else
+                {
+                    File.Copy(entry.Value, ReturnStalkerGamedataFolder() + entry.Key);
+                }
+
 
                 this.Invoke(new Action(() => progressBar1.PerformStep()));
 
-                ChangeHeader("Copying... (" + progressBar1.Value + "/" + progressBar1.Maximum + ")");                
+                ChangeHeader("Copying... (" + progressBar1.Value + "/" + progressBar1.Maximum + ")");
             }
 
             MessageBox.Show("Gamedata built. " + gamedataFiles.Count + " files were copied.");
@@ -502,6 +506,14 @@ namespace StalkerLauncher
             {
                 item.Checked = false;
             }
+        }
+
+        private void clearAndBuildGamedata_button_Click(object sender, EventArgs e)
+        {
+            if (!ClearGamedata())
+                return;
+
+            BuildGamedata();
         }
     }
 }
