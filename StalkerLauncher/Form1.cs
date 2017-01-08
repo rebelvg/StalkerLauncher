@@ -351,6 +351,7 @@ namespace StalkerLauncher
 
                 myProcess.StartInfo.FileName = pathToStalker_textBox.Text;
                 myProcess.StartInfo.Arguments = startLine_textBox.Text;
+                myProcess.StartInfo.WorkingDirectory = ReturnStalkerFolder();
                 myProcess.Start();
             }
             else
