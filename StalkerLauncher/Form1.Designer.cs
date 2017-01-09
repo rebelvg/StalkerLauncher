@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.presetName_textBox = new System.Windows.Forms.TextBox();
             this.removePreset_button = new System.Windows.Forms.Button();
             this.addPreset_button = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -81,6 +82,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.presetName_textBox);
             this.tabPage1.Controls.Add(this.removePreset_button);
             this.tabPage1.Controls.Add(this.addPreset_button);
             this.tabPage1.Controls.Add(this.comboBox1);
@@ -114,6 +116,13 @@
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // presetName_textBox
+            // 
+            this.presetName_textBox.Location = new System.Drawing.Point(268, 183);
+            this.presetName_textBox.Name = "presetName_textBox";
+            this.presetName_textBox.Size = new System.Drawing.Size(178, 20);
+            this.presetName_textBox.TabIndex = 75;
+            // 
             // removePreset_button
             // 
             this.removePreset_button.Location = new System.Drawing.Point(358, 153);
@@ -126,7 +135,7 @@
             // 
             // addPreset_button
             // 
-            this.addPreset_button.Location = new System.Drawing.Point(278, 153);
+            this.addPreset_button.Location = new System.Drawing.Point(372, 209);
             this.addPreset_button.Name = "addPreset_button";
             this.addPreset_button.Size = new System.Drawing.Size(74, 24);
             this.addPreset_button.TabIndex = 73;
@@ -136,16 +145,14 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Main"});
             this.comboBox1.Location = new System.Drawing.Point(268, 126);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(178, 21);
             this.comboBox1.TabIndex = 72;
-            this.comboBox1.Text = "Main";
-            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
-            this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
+            this.comboBox1.DropDownClosed += new System.EventHandler(this.comboBox1_DropDownClosed);
             // 
             // addModsFolder_button
             // 
@@ -492,6 +499,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button addPreset_button;
         private System.Windows.Forms.Button removePreset_button;
+        private System.Windows.Forms.TextBox presetName_textBox;
     }
 }
 

@@ -39,6 +39,9 @@ namespace StalkerLauncher
         {
             InitializeComponent();
 
+            comboBox1.Items.Add("Main");
+            comboBox1.SelectedIndex = 0;
+
             try
             {
                 if (Process.GetProcessesByName("StalkerLauncher").Length > 1)
@@ -91,7 +94,7 @@ namespace StalkerLauncher
             {
                 MessageBox.Show("Launcher crashed while initializing. Try running it as administrator.\n\n" + e.Message);
                 System.Environment.Exit(1);
-            }
+            }            
 
             label1.Text = "Version " + launcherVersion;
         }
@@ -149,7 +152,7 @@ namespace StalkerLauncher
                     {
                         foreach (KeyValuePair<string, dynamic> B in JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(A.Value.ToString()))
                         {
-                            var item = modsList_listView.Items.Add(B.Key);
+                            ListViewItem item = modsList_listView.Items.Add(B.Key);
 
                             item.Checked = B.Value.isChecked;
                         }
@@ -573,23 +576,24 @@ namespace StalkerLauncher
             RefreshPresetModsList();
         }
 
-        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            ReadPresetFile();
-
-            RefreshPresetModsList();
-        }
-
         private void addPreset_button_Click(object sender, EventArgs e)
         {
-            comboBox1.Text.Replace(" ", "");
+            SavePresetFile();
 
-            if (!comboBox1.Items.Contains(comboBox1.Text))
+            presetName_textBox.Text.Replace(" ", "");
+
+            if (presetName_textBox.Text == "")
+                return;
+
+            if (!comboBox1.Items.Contains(presetName_textBox.Text))
             {
-                comboBox1.Items.Add(comboBox1.Text);
+                int item = comboBox1.Items.Add(presetName_textBox.Text);
+                comboBox1.SelectedIndex = item;
             }
 
             SavePresetFile();
+
+            presetName_textBox.Text = "";
 
             RefreshPresetModsList();
         }
@@ -604,6 +608,8 @@ namespace StalkerLauncher
 
             comboBox1.SelectedIndex = 0;
 
+            ReadPresetFile();
+
             presets.Remove(selectedText);
 
             comboBox1.Items.RemoveAt(selectedIndex);
@@ -613,9 +619,16 @@ namespace StalkerLauncher
             RefreshPresetModsList();
         }
 
-        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        private void comboBox1_DropDown(object sender, EventArgs e)
         {
             SavePresetFile();
+        }
+
+        private void comboBox1_DropDownClosed(object sender, EventArgs e)
+        {
+            ReadPresetFile();
+
+            RefreshPresetModsList();
         }
     }
 }
