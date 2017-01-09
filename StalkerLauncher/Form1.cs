@@ -20,9 +20,11 @@ namespace StalkerLauncher
 {
     public partial class Form1 : Form
     {
-        string launcherVersion = "0.13";
+        string launcherVersion = "0.14";
 
         StalkerLauncherXmlSettings LauncherSettings;
+
+        Dictionary<string, dynamic> presets = new Dictionary<string, dynamic>();
 
         [DllImport("kernel32.dll")]
         static extern bool CreateSymbolicLink(string lpSymlinkFileName, string lpTargetFileName, SymbolicLink dwFlags);
@@ -87,7 +89,7 @@ namespace StalkerLauncher
             }
             catch (Exception e)
             {
-                MessageBox.Show("Launcher crashed while initializing. Try running it as administrator.\n\n" + e);
+                MessageBox.Show("Launcher crashed while initializing. Try running it as administrator.\n\n" + e.Message);
                 System.Environment.Exit(1);
             }
 
@@ -97,8 +99,6 @@ namespace StalkerLauncher
         public class StalkerLauncherXmlSettings
         {
             public string pathToStalker_textBox = Directory.GetCurrentDirectory() + "\\stalker.exe";
-            public List<string> modsList_listView;
-            public List<string> checkedModsList_listView;
             public string startLine_textBox;
         }
 
@@ -114,24 +114,9 @@ namespace StalkerLauncher
                 reader.Close();
 
                 pathToStalker_textBox.Text = LauncherSettings.pathToStalker_textBox;
-
-                foreach (string X in LauncherSettings.modsList_listView)
-                {
-                    if (!modsList_listView.Items.Cast<ListViewItem>().Select(x => x.Text).Contains(X))
-                    {
-                        modsList_listView.Items.Add(X);
-                    }
-                }
-
-                foreach (ListViewItem X in modsList_listView.Items)
-                {
-                    if (LauncherSettings.checkedModsList_listView.Contains(X.Text))
-                    {
-                        X.Checked = true;
-                    }
-                }
-
                 startLine_textBox.Text = LauncherSettings.startLine_textBox;
+
+                ReadPresetFile();
             }
             catch
             {
@@ -150,6 +135,36 @@ namespace StalkerLauncher
             }
         }
 
+        public void ReadPresetFile()
+        {
+            modsList_listView.Items.Clear();
+
+            if (File.Exists(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\StalkerLauncher\\StalkerLauncherPresets.json"))
+            {
+                presets = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(File.ReadAllText(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\StalkerLauncher\\StalkerLauncherPresets.json"));
+
+                foreach (KeyValuePair<string, dynamic> A in presets)
+                {
+                    if (comboBox1.Text == A.Key)
+                    {
+                        foreach (KeyValuePair<string, dynamic> B in JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(A.Value.ToString()))
+                        {
+                            var item = modsList_listView.Items.Add(B.Key);
+
+                            item.Checked = B.Value.isChecked;
+                        }
+                    }
+                    else
+                    {
+                        if (!comboBox1.Items.Contains(A.Key))
+                        {
+                            comboBox1.Items.Add(A.Key);
+                        }
+                    }
+                }
+            }
+        }
+
         public void SaveXmlFile()
         {
             try
@@ -157,8 +172,6 @@ namespace StalkerLauncher
                 LauncherSettings = new StalkerLauncherXmlSettings();
 
                 LauncherSettings.pathToStalker_textBox = pathToStalker_textBox.Text;
-                LauncherSettings.modsList_listView = modsList_listView.Items.Cast<ListViewItem>().Select(x => x.Text).ToList();
-                LauncherSettings.checkedModsList_listView = modsList_listView.CheckedItems.Cast<ListViewItem>().Select(x => x.Text).ToList();
                 LauncherSettings.startLine_textBox = startLine_textBox.Text;
 
                 System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(StalkerLauncherXmlSettings));
@@ -166,11 +179,31 @@ namespace StalkerLauncher
                 System.IO.FileStream writer = System.IO.File.Create(xmlPath_textBox.Text);
                 serializer.Serialize(writer, LauncherSettings);
                 writer.Close();
+
+                SavePresetFile();
             }
             catch
             {
                 MessageBox.Show("Saving xml settings failed.");
             }
+        }
+
+        public void SavePresetFile()
+        {
+            presets[comboBox1.Text] = new Dictionary<string, dynamic>();
+
+            foreach (ListViewItem A in modsList_listView.Items)
+            {
+                Dictionary<string, dynamic> data = new Dictionary<string, dynamic>();
+
+                data["isChecked"] = A.Checked;
+
+                presets[comboBox1.Text][A.Text] = data;
+            }
+
+            string json = JsonConvert.SerializeObject(presets, Formatting.Indented);
+
+            File.WriteAllText(System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\StalkerLauncher\\StalkerLauncherPresets.json", json);
         }
 
         public string ReturnStalkerFolder()
@@ -222,12 +255,12 @@ namespace StalkerLauncher
             {
                 if (Directory.Exists(chosenFolder.SelectedPath + "\\gamedata"))
                 {
-                    modsList_listView.Items.Add(chosenFolder.SelectedPath);
+                    if (!modsList_listView.Items.Cast<ListViewItem>().Select(X => X.Text).Contains(chosenFolder.SelectedPath))
+                    {
+                        var item = modsList_listView.Items.Add(chosenFolder.SelectedPath);
 
-                    var item = modsList_listView.FindItemWithText(chosenFolder.SelectedPath);
-
-                    if (item != null)
                         item.Checked = true;
+                    }
                 }
                 else
                 {
@@ -315,7 +348,7 @@ namespace StalkerLauncher
 
         public bool BuildGamedata()
         {
-            RefreshPresetModsList();            
+            RefreshPresetModsList();
 
             Dictionary<string, string> gamedataFiles = new Dictionary<string, string>();
 
@@ -515,6 +548,74 @@ namespace StalkerLauncher
                 return;
 
             BuildGamedata();
+        }
+
+        private void addModsFolder_button_Click(object sender, EventArgs e)
+        {
+            VistaFolderBrowserDialog chosenFolder = new VistaFolderBrowserDialog();
+            chosenFolder.Description = "Select custom mod folder.";
+            chosenFolder.UseDescriptionForTitle = true;
+
+            if (chosenFolder.ShowDialog().Value)
+            {
+                List<string> folders = Directory.GetDirectories(chosenFolder.SelectedPath, "*", System.IO.SearchOption.TopDirectoryOnly).ToList();
+
+                foreach (string A in folders)
+                {
+                    if (Directory.Exists(A + "\\gamedata"))
+                    {
+                        if (!modsList_listView.Items.Cast<ListViewItem>().Select(X => X.Text).Contains(A))
+                            modsList_listView.Items.Add(A);
+                    }
+                }
+            }
+
+            RefreshPresetModsList();
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            ReadPresetFile();
+
+            RefreshPresetModsList();
+        }
+
+        private void addPreset_button_Click(object sender, EventArgs e)
+        {
+            comboBox1.Text.Replace(" ", "");
+
+            if (!comboBox1.Items.Contains(comboBox1.Text))
+            {
+                comboBox1.Items.Add(comboBox1.Text);
+            }
+
+            SavePresetFile();
+
+            RefreshPresetModsList();
+        }
+
+        private void removePreset_button_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == 0)
+                return;
+
+            string selectedText = comboBox1.Text;
+            int selectedIndex = comboBox1.SelectedIndex;
+
+            comboBox1.SelectedIndex = 0;
+
+            presets.Remove(selectedText);
+
+            comboBox1.Items.RemoveAt(selectedIndex);
+
+            SavePresetFile();
+
+            RefreshPresetModsList();
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            SavePresetFile();
         }
     }
 }

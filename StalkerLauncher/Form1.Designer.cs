@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.removePreset_button = new System.Windows.Forms.Button();
+            this.addPreset_button = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.addModsFolder_button = new System.Windows.Forms.Button();
+            this.clearAndBuildGamedata_button = new System.Windows.Forms.Button();
             this.selectAll_button = new System.Windows.Forms.Button();
             this.deselectAll_button = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -57,7 +62,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.modsGamedata_listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.clearAndBuildGamedata_button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -77,6 +81,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.removePreset_button);
+            this.tabPage1.Controls.Add(this.addPreset_button);
+            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.addModsFolder_button);
             this.tabPage1.Controls.Add(this.clearAndBuildGamedata_button);
             this.tabPage1.Controls.Add(this.selectAll_button);
             this.tabPage1.Controls.Add(this.deselectAll_button);
@@ -105,6 +113,61 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // removePreset_button
+            // 
+            this.removePreset_button.Location = new System.Drawing.Point(358, 153);
+            this.removePreset_button.Name = "removePreset_button";
+            this.removePreset_button.Size = new System.Drawing.Size(88, 24);
+            this.removePreset_button.TabIndex = 74;
+            this.removePreset_button.Text = "Remove Preset";
+            this.removePreset_button.UseVisualStyleBackColor = true;
+            this.removePreset_button.Click += new System.EventHandler(this.removePreset_button_Click);
+            // 
+            // addPreset_button
+            // 
+            this.addPreset_button.Location = new System.Drawing.Point(278, 153);
+            this.addPreset_button.Name = "addPreset_button";
+            this.addPreset_button.Size = new System.Drawing.Size(74, 24);
+            this.addPreset_button.TabIndex = 73;
+            this.addPreset_button.Text = "Add Preset";
+            this.addPreset_button.UseVisualStyleBackColor = true;
+            this.addPreset_button.Click += new System.EventHandler(this.addPreset_button_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Main"});
+            this.comboBox1.Location = new System.Drawing.Point(268, 126);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(178, 21);
+            this.comboBox1.TabIndex = 72;
+            this.comboBox1.Text = "Main";
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
+            this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            // 
+            // addModsFolder_button
+            // 
+            this.addModsFolder_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addModsFolder_button.Location = new System.Drawing.Point(482, 450);
+            this.addModsFolder_button.Name = "addModsFolder_button";
+            this.addModsFolder_button.Size = new System.Drawing.Size(105, 36);
+            this.addModsFolder_button.TabIndex = 71;
+            this.addModsFolder_button.Text = "Add Mods Folder";
+            this.addModsFolder_button.UseVisualStyleBackColor = true;
+            this.addModsFolder_button.Click += new System.EventHandler(this.addModsFolder_button_Click);
+            // 
+            // clearAndBuildGamedata_button
+            // 
+            this.clearAndBuildGamedata_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearAndBuildGamedata_button.Location = new System.Drawing.Point(796, 555);
+            this.clearAndBuildGamedata_button.Name = "clearAndBuildGamedata_button";
+            this.clearAndBuildGamedata_button.Size = new System.Drawing.Size(93, 38);
+            this.clearAndBuildGamedata_button.TabIndex = 70;
+            this.clearAndBuildGamedata_button.Text = "Clear and Build Gamedata";
+            this.clearAndBuildGamedata_button.UseVisualStyleBackColor = true;
+            this.clearAndBuildGamedata_button.Click += new System.EventHandler(this.clearAndBuildGamedata_button_Click);
             // 
             // selectAll_button
             // 
@@ -151,7 +214,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 121);
+            this.label4.Location = new System.Drawing.Point(8, 84);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 13);
             this.label4.TabIndex = 65;
@@ -160,7 +223,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 59);
+            this.label3.Location = new System.Drawing.Point(8, 45);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 64;
@@ -169,7 +232,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 14);
+            this.label2.Location = new System.Drawing.Point(8, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 63;
@@ -253,7 +316,7 @@
             // 
             // changePathToArma3Client_button
             // 
-            this.changePathToArma3Client_button.Location = new System.Drawing.Point(420, 74);
+            this.changePathToArma3Client_button.Location = new System.Drawing.Point(420, 61);
             this.changePathToArma3Client_button.Name = "changePathToArma3Client_button";
             this.changePathToArma3Client_button.Size = new System.Drawing.Size(26, 20);
             this.changePathToArma3Client_button.TabIndex = 53;
@@ -274,9 +337,9 @@
             // 
             // startLine_textBox
             // 
-            this.startLine_textBox.Location = new System.Drawing.Point(9, 137);
+            this.startLine_textBox.Location = new System.Drawing.Point(6, 100);
             this.startLine_textBox.Name = "startLine_textBox";
-            this.startLine_textBox.Size = new System.Drawing.Size(437, 20);
+            this.startLine_textBox.Size = new System.Drawing.Size(440, 20);
             this.startLine_textBox.TabIndex = 51;
             // 
             // modsList_listView
@@ -306,19 +369,19 @@
             // 
             // pathToStalker_textBox
             // 
-            this.pathToStalker_textBox.Location = new System.Drawing.Point(7, 75);
+            this.pathToStalker_textBox.Location = new System.Drawing.Point(6, 61);
             this.pathToStalker_textBox.Name = "pathToStalker_textBox";
             this.pathToStalker_textBox.ReadOnly = true;
-            this.pathToStalker_textBox.Size = new System.Drawing.Size(407, 20);
+            this.pathToStalker_textBox.Size = new System.Drawing.Size(408, 20);
             this.pathToStalker_textBox.TabIndex = 49;
             // 
             // xmlPath_textBox
             // 
-            this.xmlPath_textBox.Location = new System.Drawing.Point(7, 30);
+            this.xmlPath_textBox.Location = new System.Drawing.Point(6, 22);
             this.xmlPath_textBox.Name = "xmlPath_textBox";
             this.xmlPath_textBox.ReadOnly = true;
             this.xmlPath_textBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.xmlPath_textBox.Size = new System.Drawing.Size(439, 20);
+            this.xmlPath_textBox.Size = new System.Drawing.Size(440, 20);
             this.xmlPath_textBox.TabIndex = 48;
             // 
             // tabPage2
@@ -373,17 +436,6 @@
             this.columnHeader1.Text = "Mods Gamedata";
             this.columnHeader1.Width = 478;
             // 
-            // clearAndBuildGamedata_button
-            // 
-            this.clearAndBuildGamedata_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.clearAndBuildGamedata_button.Location = new System.Drawing.Point(796, 555);
-            this.clearAndBuildGamedata_button.Name = "clearAndBuildGamedata_button";
-            this.clearAndBuildGamedata_button.Size = new System.Drawing.Size(93, 38);
-            this.clearAndBuildGamedata_button.TabIndex = 70;
-            this.clearAndBuildGamedata_button.Text = "Clear and Build Gamedata";
-            this.clearAndBuildGamedata_button.UseVisualStyleBackColor = true;
-            this.clearAndBuildGamedata_button.Click += new System.EventHandler(this.clearAndBuildGamedata_button_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,6 +488,10 @@
         private System.Windows.Forms.Button selectAll_button;
         private System.Windows.Forms.Button deselectAll_button;
         private System.Windows.Forms.Button clearAndBuildGamedata_button;
+        private System.Windows.Forms.Button addModsFolder_button;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button addPreset_button;
+        private System.Windows.Forms.Button removePreset_button;
     }
 }
 
