@@ -44,7 +44,7 @@ namespace StalkerLauncher
 
             try
             {
-                if (Process.GetProcessesByName("StalkerLauncher").Length > 1)
+                if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(AppDomain.CurrentDomain.FriendlyName)).Length > 1)
                 {
                     MessageBox.Show("Launcher is already running.");
                     System.Environment.Exit(1);
